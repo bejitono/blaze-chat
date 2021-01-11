@@ -90,6 +90,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 # Lndmobile
-Sources/Lndmobile.framework/
+Lndmobile.framework/
+LightningKit/
 
 .DS_Store
