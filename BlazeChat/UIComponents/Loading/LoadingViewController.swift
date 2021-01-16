@@ -42,7 +42,7 @@ private extension LoadingViewController {
     
     func setupViews() {
         modalTransitionStyle = .crossDissolve
-//        view.backgroundColor = Theme.color.neutral100.withAlphaComponent(.backgroundAlpha)
+        view.backgroundColor = Theme.color.neutral100.withAlphaComponent(.backgroundAlpha)
         setupOverlayView()
         setupTitleLabel()
         setupProgressIndicatorView()
@@ -57,7 +57,7 @@ private extension LoadingViewController {
             overlayView.widthAnchor.constraint(equalToConstant: .overlayWidth),
             overlayView.heightAnchor.constraint(equalToConstant: .overlayHeight)
         ])
-//        overlayView.backgroundColor = Theme.color.primaryBackground
+        overlayView.backgroundColor = Theme.color.primaryBackground
         overlayView.layer.cornerRadius = .overlayCornerRadius
         overlayView.applyShadow()
     }
@@ -70,12 +70,12 @@ private extension LoadingViewController {
             titleLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: .padding),
             titleLabel.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -.padding)
         ])
-//        titleLabel.font = Theme.font.body1
+        titleLabel.font = Theme.font.body1
         titleLabel.textAlignment = .center
     }
     
     func setupProgressIndicatorView() {
-//        overlayView.backgroundColor = Theme.color.primaryBackground
+        overlayView.backgroundColor = Theme.color.primaryBackground
         progressIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         overlayView.addSubview(progressIndicatorView)
         NSLayoutConstraint.activate([

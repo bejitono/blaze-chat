@@ -97,7 +97,7 @@ private extension LoadingAnimationView {
     func makeColorAnimation(in group: CAAnimationGroup) -> CAKeyframeAnimation {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "strokeColor"
-//        animation.values = [Theme.color.primary.cgColor, Theme.color.lightPrimary.cgColor]
+        animation.values = [Theme.color.primary.cgColor, Theme.color.lightPrimary.cgColor]
         animation.values = [Theme.color.primary.cgColor, Theme.color.lightPrimary.cgColor]
         animation.duration = .groupAnimationBeginTime
         animation.repeatCount = .greatestFiniteMagnitude
