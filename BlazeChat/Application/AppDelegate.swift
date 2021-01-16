@@ -13,15 +13,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var registrationFlow: RegistrationFlowCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupTheme()
         
+        let navigationController = UINavigationController()
+        registrationFlow = RegistrationFlowCoordinator(navigationController: navigationController)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootViewController = SeedViewController(seed: [])
-        let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        startLnd()
         return true
     }
 }
@@ -34,18 +38,13 @@ private extension AppDelegate {
         Theme.initialize(colorTheme: ColorTheme(), fontTheme: FontTheme(), imageTheme: ImageTheme())
     }
     
-    func setupLnd() {
+    func startLnd() {
         let cache =  UserCache()
-        let password = "12345678"
-        LKChannel.shared.start { result in
-            guard let user: User = cache.get() else { // TODO: get password from keychain
-                LKWallet.shared.generateSeed { result in
-                    switch result {
-                    case .success(let seed):
-                        print(seed)
-                    case .failure(let error):
-                        print(error)
-                    }
+        LKChannel.shared.start { [weak self] result in
+            guard let self = self else { return }
+            guard let user: User = cache.get() else {
+                DispatchQueue.main.async {
+                    self.registrationFlow?.start()
                 }
                 return
             }
