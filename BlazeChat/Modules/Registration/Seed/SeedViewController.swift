@@ -10,6 +10,7 @@ import UIKit
 
 final class SeedViewController: UIViewController {
     
+    private let seedView = LightningKitUI.SeedViewController()
     private let loadingView = LoadingViewController()
     private let viewModel: SeedViewModelInput
     
@@ -36,10 +37,6 @@ extension SeedViewController: SeedViewModelOutput {
     func didGenerate(seed: [String]) {
         setupSeedView(with: seed)
     }
-    
-    func didThrow(error: String) {
-        // Handle error
-    }
 }
 
 // MARK: - SeedViewControllerDelegate
@@ -62,8 +59,8 @@ private extension SeedViewController {
     }
     
     func setupSeedView(with seed: [String]) {
-        let seedView = LightningKitUI.SeedViewController(seed: seed)
         seedView.delegate = self
+        seedView.set(seed: seed)
         seedView.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(seedView.view)
         NSLayoutConstraint.activate([

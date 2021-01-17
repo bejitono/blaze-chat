@@ -6,21 +6,6 @@
 //
 
 import Foundation
-import LightningKit
-
-protocol SeedViewModelInput {
-    func generateSeed()
-    func confirmSeed()
-}
-
-protocol SeedViewModelOutput: AnyObject {
-    func didGenerate(seed: [String])
-    func didThrow(error: String)
-}
-
-protocol SeedModuleOutput: AnyObject {
-    func didConfirm(seed: [String])
-}
 
 final class SeedViewModel {
     
@@ -49,7 +34,7 @@ extension SeedViewModel: SeedViewModelInput {
                     self.seed = seed.phrase
                     self.output?.didGenerate(seed: seed.phrase)
                 case .failure:
-                    self.output?.didThrow(error: "Failed to generate seed. Please try again.")
+                    self.moduleOutput?.generateSeedDidFail()
                 }
             }
         }
