@@ -20,4 +20,15 @@ struct RegistrationFactory {
         
         return view
     }
+    
+    func makeInitalizeWalletView(output: InitializeWalletModuleOutput, seed: [String]) -> UIViewController {
+        let service = WalletService(walletService: LKWallet.shared)
+        let viewModel = InitializeWalletViewModel(walletService: service, seed: seed)
+        let view = InitializeWalletViewController(viewModel: viewModel)
+        
+        viewModel.output = view
+        viewModel.moduleOutput = output
+        
+        return view
+    }
 }
